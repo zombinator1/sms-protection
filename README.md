@@ -112,17 +112,23 @@ Each endpoint returns the same error response like:
 
 ![img.png](workflow.png)
 
-## 5. Running the app
+## 5. Running and testing the app
 
 Make sure you are using Java 21.
 
 Application utilizes JOOQ to communicate with database.
 
-1. Run `setup.sh` to initialize postgres DB and generate JOOQ classes. Classes should be in 
+1. Run `setup.sh` to initialize postgres DB and generate JOOQ classes. Classes should be present in 
 `./target/generated-sources/jooq`.
 2. You can run spring boot tests. Tests utilizes Testcontainers and WireMock.
-3. You can't test it with Postman etc. External service is not accessible. No separate container is implemented for that case. 
+3. You can't test `api/sms/check-fishing` endpoint with Postman. External service is not accessible. No separate container is implemented for that case. 
+
+Creating a .jar. 
+1. `setup.sh`
+2. `mvn clean install`
 
 ## 6. Dockerfile & deployment
 
-Dockerfile does not work. Database connection is not correctly configured. Proper config must be provided (especially for specific deployments).
+You can run the application by invoking `docker compose up` in a root directory. (Don't forget to generate a .jar before).
+
+Note: Real url and api-key to WebRisk API is not configured in `compose.yml`. Didn't want to spend money on it.
